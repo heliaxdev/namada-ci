@@ -126,6 +126,7 @@ speculos:
   ARG cometbft_version=0.37.9
 
   RUN apt-get update -y
+  RUN apt-get curl -y
   RUN apt-get install -y protobuf-compiler 
   RUN apt-get install -y build-essential 
   RUN apt-get install -y clang-tools clang
