@@ -22,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        command: [namada, wasm, speculos]
+        command: [namada, wasm]
 
     env:
       FORCE_COLOR: 1

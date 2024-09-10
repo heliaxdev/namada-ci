@@ -29,6 +29,7 @@ namada:
     python3-mnemonic python3-pil python3-pyelftools python3-requests \
     qemu-user-static libvncserver-dev
 
+  RUN pipx ensurepath
   RUN pipx install speculos
     
   RUN rustup toolchain install $toolchain-x86_64-unknown-linux-gnu --no-self-update --component clippy,rustfmt,rls,rust-analysis,rust-docs,rust-src,llvm-tools-preview
@@ -90,8 +91,6 @@ namada:
   RUN tar --strip-components 2 -xvzf binaryen.tar.gz binaryen-version_${wasm_opt_version}/bin/wasm-opt
   RUN mv wasm-opt /usr/local/bin
   RUN chmod +x /usr/local/bin/wasm-opt
-
-  RUN pip install speculos
 
   SAVE IMAGE --push ghcr.io/heliaxdev/namada-ci:namada-latest ghcr.io/heliaxdev/namada-ci:namada-main
 
