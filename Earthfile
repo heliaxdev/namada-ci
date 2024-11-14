@@ -1,7 +1,10 @@
 VERSION 0.8
 
+wasmd:
+  FROM cosmwasm/wasmd:v0.52.0
+
 namada:
-  FROM cosmwasm/wasmd:v0.52.0 AS wasmd-image
+  FROM +wasmd
 
   FROM rust:1.81.0-bookworm
 
@@ -85,7 +88,7 @@ namada:
   RUN chmod +x /usr/local/bin/gaiad
 
   # install wasmd
-  COPY --from=wasmd-image /usr/bin/wasmd /usr/local/bin/wasmd
+  COPY +wasmd/usr/bin/wasmd /usr/local/bin/wasmd
   RUN chmod +x /usr/local/bin/wasmd
 
   # download cosmwasm contracts
