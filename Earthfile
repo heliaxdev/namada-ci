@@ -5,6 +5,7 @@ wasmd:
 
 namada:
   FROM +wasmd
+  SAVE ARTIFACT /usr/bin/wasmd
 
   FROM rust:1.81.0-bookworm
 
