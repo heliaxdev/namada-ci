@@ -5,8 +5,6 @@ wasmd:
   SAVE ARTIFACT /usr/bin/wasmd AS LOCAL wasmd
 
 namada:
-  FROM +wasmd
-
   FROM rust:1.81.0-bookworm
 
   WORKDIR /__w/namada/namada
