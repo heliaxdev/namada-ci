@@ -2,7 +2,7 @@ VERSION 0.8
 
 wasmd:
   FROM cosmwasm/wasmd:v0.52.0
-  SAVE ARTIFACT /usr/bin/wasmd
+  SAVE ARTIFACT /usr/bin/wasmd AS LOCAL wasmd
 
 namada:
   FROM +wasmd
@@ -89,7 +89,7 @@ namada:
   RUN chmod +x /usr/local/bin/gaiad
 
   # install wasmd
-  COPY +wasmd/usr/bin/wasmd /usr/local/bin/wasmd
+  COPY +wasmd/wasmd /usr/local/bin/wasmd
   RUN chmod +x /usr/local/bin/wasmd
 
   # download cosmwasm contracts
