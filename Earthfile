@@ -2,10 +2,10 @@ VERSION 0.8
 
 wasmd:
   FROM cosmwasm/wasmd:v0.52.0
+  SAVE ARTIFACT /usr/bin/wasmd
 
 namada:
   FROM +wasmd
-  SAVE ARTIFACT /usr/bin/wasmd
 
   FROM rust:1.81.0-bookworm
 
