@@ -19,6 +19,7 @@ namada:
   ARG wasm_opt_version=119
 
   RUN apt-get update -y
+  RUN apt-get software-properties-common
   RUN apt-get install -y protobuf-compiler 
   RUN apt-get install -y build-essential 
   RUN apt-get install -y clang-tools clang
