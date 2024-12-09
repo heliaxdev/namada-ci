@@ -29,7 +29,7 @@ namada:
   RUN apt-get install -y parallel
 
   # install python 3.10
-  RUN apt software-properties-common
+  RUN apt install software-properties-common -y
   RUN add-apt-repository ppa:deadsnakes/ppa -y
   RUN apt install python3.10
 
