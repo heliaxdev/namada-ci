@@ -19,7 +19,6 @@ namada:
   ARG wasm_opt_version=119
 
   RUN apt-get update -y
-  RUN apt-get software-properties-common
   RUN apt-get install -y protobuf-compiler 
   RUN apt-get install -y build-essential 
   RUN apt-get install -y clang-tools clang
@@ -30,6 +29,7 @@ namada:
   RUN apt-get install -y parallel
 
   # install python 3.10
+  RUN apt software-properties-common
   RUN add-apt-repository ppa:deadsnakes/ppa -y
   RUN apt install python3.10
 
