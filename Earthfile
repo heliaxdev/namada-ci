@@ -28,6 +28,10 @@ namada:
   RUN apt-get install -y gcc
   RUN apt-get install -y parallel
 
+  # install python 3.10
+  RUN add-apt-repository ppa:deadsnakes/ppa -y
+  RUN apt install python3.10
+
   # needed for speculos
   RUN apt install -y \
     git python3-pip pipx cmake gcc-arm-linux-gnueabihf libc6-dev-armhf-cross gdb-multiarch \
