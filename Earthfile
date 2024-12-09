@@ -27,11 +27,7 @@ namada:
   RUN apt-get install -y pkg-config
   RUN apt-get install -y gcc
   RUN apt-get install -y parallel
-
-  # install python 3.10
-  RUN apt install software-properties-common -y
-  RUN add-apt-repository ppa:deadsnakes/ppa -y
-  RUN apt install python3.10
+  RUN apt-get install -y python3
 
   # needed for speculos
   RUN apt install -y \
