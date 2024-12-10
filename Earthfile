@@ -40,6 +40,11 @@ namada:
 
   RUN pipx ensurepath
   RUN pipx install speculos
+
+  # needed for ledger-namada (ledger-zxlib deps)
+  RUN apt-get install -y libusb-1.0.0
+  RUN pipx install -U libusb
+  RUN pipx install -U --no-cache ledgerblue ecpy
     
   RUN rustup toolchain install $toolchain-x86_64-unknown-linux-gnu --no-self-update --component clippy,rustfmt,rls,rust-analysis,rust-docs,rust-src,llvm-tools-preview
   RUN rustup target add wasm32-unknown-unknown
