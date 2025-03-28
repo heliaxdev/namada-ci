@@ -35,7 +35,6 @@ namada:
   RUN apt-get install -y ca-certificates
   RUN apt-get install -y unzip
 
-  RUN which -a rustup
   # install rust 
   RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
