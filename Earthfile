@@ -35,6 +35,7 @@ namada:
   RUN apt-get install -y ca-certificates
   RUN apt-get install -y unzip
 
+  RUN which -a rustup
   # install rust 
   RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
@@ -66,15 +67,16 @@ namada:
   RUN pipx install speculos
 
   ENV PATH="/root/.cargo/bin:/root/.local/bin:$PATH"
+  RUN which -a rustc
+  RUN which -a cargo
+  RUN which -a rustup
+  RUN echo $PATH
     
   RUN rustup toolchain install $toolchain-x86_64-unknown-linux-gnu --no-self-update --component clippy,rustfmt,rust-analysis,rust-docs,rust-src,llvm-tools-preview
   RUN rustup target add --toolchain $toolchain-x86_64-unknown-linux-gnu wasm32-unknown-unknown
   RUN rustup toolchain install $nightly_toolchain-x86_64-unknown-linux-gnu --no-self-update --component clippy,rustfmt,rust-analysis,rust-docs,rust-src,llvm-tools-preview,rustc-codegen-cranelift-preview
   RUN rustup target add --toolchain $nightly_toolchain-x86_64-unknown-linux-gnu wasm32-unknown-unknown
   RUN rustup default $toolchain-x86_64-unknown-linux-gnu
-  RUN which -a rustc
-  RUN which -a cargo
-  RUN echo $PATH
 
   # download masp artifacts
   RUN mkdir -p /masp/.masp-params
