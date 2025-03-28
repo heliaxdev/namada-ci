@@ -7,6 +7,8 @@ wasmd:
 namada:
   FROM ubuntu:24.04
 
+  USER github
+
   ENV DEBIAN_FRONTEND=noninteractive
 
   WORKDIR /__w/namada/namada
