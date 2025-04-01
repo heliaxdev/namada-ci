@@ -48,7 +48,9 @@ jobs:
     - name: Determine Image Tag
       id: tag
       run: |
-        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+          echo "IMAGE_TAG=-main" >> $GITHUB_ENV
+        elif [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
           echo "IMAGE_TAG=-main" >> $GITHUB_ENV
         else
           echo "IMAGE_TAG=-${{ github.ref_name }}" >> $GITHUB_ENV
