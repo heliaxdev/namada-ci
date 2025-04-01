@@ -21,7 +21,7 @@ namada:
   ARG wasm_opt_version=119
   ARG mold_version=2.37.1
   ARG tag=namada-main
-  ARG cmake_version=3.20.*
+  ARG cmake_version=3.20.0
 
   RUN apt-get update -y
   RUN apt-get install -y curl
@@ -44,7 +44,6 @@ namada:
   RUN apt-get install -y git
   RUN apt-get install -y python3-pip
   RUN apt-get install -y pipx
-  RUN apt-get install -y cmake=$cmake_version
   RUN apt-get install -y gcc-arm-linux-gnueabihf
   RUN apt-get install -y libc6-dev-armhf-cross
   RUN apt-get install -y gdb-multiarch
@@ -60,6 +59,13 @@ namada:
   RUN apt-get install -y libvncserver-dev
   RUN apt-get install -y make
   RUN apt-get install -y qtbase5-dev qtchooser qt5-qmake qttools5-dev-tools
+
+  # install cmake 
+  RUN apt remove --purge cmake && apt autoremove
+  RUN wget https://github.com/Kitware/CMake/releases/download/v$cmake_version/cmake-$cmake_version-linux-x86_64.tar.gz
+  RUN tar -xvzf cmake-$cmake_version-linux-x86_64.tar.gz && mv cmake-$cmake_version-linux-x86_64/bin/* /usr/local/bin
+
+  RUN cmake --version
 
   RUN pipx ensurepath
   RUN pipx install speculos
