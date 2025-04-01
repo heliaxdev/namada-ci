@@ -64,10 +64,8 @@ namada:
   # install cmake 
   RUN apt-get remove --purge -y cmake && apt-get autoremove -y
   RUN wget https://github.com/Kitware/CMake/releases/download/v$cmake_version/cmake-$cmake_version-linux-x86_64.tar.gz
-  RUN tar -xvzf cmake-$cmake_version-linux-x86_64.tar.gz && mv cmake-$cmake_version-linux-x86_64/bin/* /usr/local/bin
+  RUN tar -xzf cmake-$cmake_version-linux-x86_64.tar.gz && mv cmake-$cmake_version-linux-x86_64/ /usr/local/bin
   RUN rm -rf cmake-$cmake_version-linux-x86_64.tar.gz cmake-$cmake_version-linux-x86_64
-
-  RUN cmake --version
 
   RUN pipx ensurepath
   RUN pipx install speculos
@@ -75,7 +73,7 @@ namada:
   # install rust 
   RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
-  ENV PATH="/root/.cargo/bin:/root/.local/bin:$PATH"
+  ENV PATH="/root/.cargo/bin:/root/.local/bin:/usr/local/cmake/bin:$PATH"
   ENV RUSTUP_HOME="/root/.rustup"
   ENV CARGO_HOME="/root/.cargo"
     
@@ -168,13 +166,9 @@ wasm:
   RUN apt-get install -y protobuf-compiler 
   RUN apt-get install -y parallel
 
-  RUN rustup toolchain install $toolchain --profile minimal --no-self-update
+  RUN rustup toolchain install $toolchain --no-self-update --component cargo,rust-std,rustc,rls,rust-analysis,rust-docs
   RUN rustup target add wasm32-unknown-unknown
   RUN rustup default $toolchain-x86_64-unknown-linux-gnu
-
-  ENV PATH="/root/.cargo/bin:/root/.local/bin:$PATH"
-  ENV RUSTUP_HOME="/root/.rustup"
-  ENV CARGO_HOME="/root/.cargo"
 
   # install cargo binstall 
   RUN curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
