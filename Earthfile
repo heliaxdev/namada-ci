@@ -21,6 +21,7 @@ namada:
   ARG wasm_opt_version=119
   ARG mold_version=2.37.1
   ARG tag=namada-main
+  ARG cmake_version=3.20.*
 
   RUN apt-get update -y
   RUN apt-get install -y curl
@@ -43,7 +44,7 @@ namada:
   RUN apt-get install -y git
   RUN apt-get install -y python3-pip
   RUN apt-get install -y pipx
-  RUN apt-get install -y cmake
+  RUN apt-get install -y cmake=$cmake_version
   RUN apt-get install -y gcc-arm-linux-gnueabihf
   RUN apt-get install -y libc6-dev-armhf-cross
   RUN apt-get install -y gdb-multiarch
