@@ -64,8 +64,11 @@ namada:
   # install cmake 
   RUN apt-get remove --purge -y cmake && apt-get autoremove -y
   RUN wget https://github.com/Kitware/CMake/releases/download/v$cmake_version/cmake-$cmake_version-linux-x86_64.tar.gz
-  RUN tar -xzf cmake-$cmake_version-linux-x86_64.tar.gz && mv cmake-$cmake_version-linux-x86_64/ /usr/local/bin
-  RUN rm -rf cmake-$cmake_version-linux-x86_64.tar.gz cmake-$cmake_version-linux-x86_64
+  RUN tar -xzf cmake-$cmake_version-linux-x86_64.tar.gz && mv cmake-$cmake_version-linux-x86_64/ /usr/local/cmake
+  RUN ln -sf /usr/local/cmake/bin/* /usr/local/bin/
+  RUN rm -rf cmake-$cmake_version-linux-x86_64.tar.gz
+
+  RUN cmake --version
 
   RUN pipx ensurepath
   RUN pipx install speculos
@@ -73,7 +76,7 @@ namada:
   # install rust 
   RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
-  ENV PATH="/root/.cargo/bin:/root/.local/bin:/usr/local/cmake/bin:$PATH"
+  ENV PATH="/root/.cargo/bin:/root/.local/bin:$PATH"
   ENV RUSTUP_HOME="/root/.rustup"
   ENV CARGO_HOME="/root/.cargo"
     
