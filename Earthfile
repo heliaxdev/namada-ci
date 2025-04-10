@@ -169,6 +169,8 @@ wasm:
   RUN apt-get install -y protobuf-compiler 
   RUN apt-get install -y parallel
 
+  RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+
   ENV PATH="/root/.cargo/bin:/root/.local/bin:$PATH"
   ENV RUSTUP_HOME="/root/.rustup"
   ENV CARGO_HOME="/root/.cargo"
