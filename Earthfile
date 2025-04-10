@@ -170,6 +170,7 @@ wasm:
   RUN apt-get install -y parallel
   RUN apt-get install -y curl
   RUN apt-get install -y build-essential
+  RUN apt-get install -y git
 
   RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
