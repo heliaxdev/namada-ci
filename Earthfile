@@ -42,7 +42,6 @@ namada:
   RUN apt-get install -y git
   RUN apt-get install -y build-essential
   RUN apt-get install -y ca-certificates
-  RUN apt-get install -y git
   RUN apt-get install -y python3-pip
   RUN apt-get install -y pipx
   RUN apt-get install -y gcc-arm-linux-gnueabihf
@@ -157,7 +156,7 @@ namada:
   SAVE IMAGE --push ghcr.io/heliaxdev/namada-ci:namada-latest ghcr.io/heliaxdev/namada-ci:$tag
 
 wasm:
-  FROM rust:1.85.1-bookworm
+  FROM ubuntu:24.04
 
   ARG toolchain=1.85.1
   ARG wasm_opt_version=118
@@ -168,9 +167,17 @@ wasm:
   RUN apt-get update -y
   RUN apt-get install -y protobuf-compiler 
   RUN apt-get install -y parallel
+  RUN apt-get install -y curl
+  RUN apt-get install -y build-essential 
+
+  RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+  ENV PATH="/root/.cargo/bin:/root/.local/bin:$PATH"
+  ENV RUSTUP_HOME="/root/.rustup"
+  ENV CARGO_HOME="/root/.cargo"
 
   RUN rustup toolchain install $toolchain --no-self-update --component cargo,rust-std,rustc,rls,rust-analysis,rust-docs
-  RUN rustup target add wasm32-unknown-unknown
+  RUN rustup target add --toolchain $toolchain-x86_64-unknown-linux-gnu wasm32-unknown-unknown
   RUN rustup default $toolchain-x86_64-unknown-linux-gnu
 
   # install cargo binstall 
@@ -184,5 +191,9 @@ wasm:
   RUN tar --strip-components 2 -xvzf binaryen.tar.gz binaryen-version_${wasm_opt_version}/bin/wasm-opt
   RUN mv wasm-opt /usr/local/bin
   RUN chmod +x /usr/local/bin/wasm-opt
+
+  # download llvm clang
+  RUN wget -qO- https://apt.llvm.org/llvm.sh | bash -s -- 18
+  ENV CC = "/usr/bin/clang-18"
 
   SAVE IMAGE --push ghcr.io/heliaxdev/namada-ci:wasm-latest ghcr.io/heliaxdev/namada-ci:$tag
