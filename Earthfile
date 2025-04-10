@@ -157,7 +157,7 @@ namada:
   SAVE IMAGE --push ghcr.io/heliaxdev/namada-ci:namada-latest ghcr.io/heliaxdev/namada-ci:$tag
 
 wasm:
-  FROM rust:1.85.1-bookworm
+  FROM ubuntu:24.04
 
   ARG toolchain=1.85.1
   ARG wasm_opt_version=118
@@ -168,6 +168,10 @@ wasm:
   RUN apt-get update -y
   RUN apt-get install -y protobuf-compiler 
   RUN apt-get install -y parallel
+
+  ENV PATH="/root/.cargo/bin:/root/.local/bin:$PATH"
+  ENV RUSTUP_HOME="/root/.rustup"
+  ENV CARGO_HOME="/root/.cargo"
 
   RUN rustup toolchain install $toolchain --no-self-update --component cargo,rust-std,rustc,rls,rust-analysis,rust-docs
   RUN rustup target add wasm32-unknown-unknown
