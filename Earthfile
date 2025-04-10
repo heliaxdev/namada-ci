@@ -168,6 +168,7 @@ wasm:
   RUN apt-get update -y
   RUN apt-get install -y protobuf-compiler 
   RUN apt-get install -y parallel
+  RUN apt-get install -y curl
 
   RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
