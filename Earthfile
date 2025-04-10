@@ -159,7 +159,7 @@ namada:
 wasm:
   FROM rust:1.85.1-bookworm
 
-  ARG toolchain=1.85.1
+  ARG toolchain=1.81.0
   ARG wasm_opt_version=118
   ARG tag=wasm-main
 
