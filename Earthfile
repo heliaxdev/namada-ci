@@ -11,8 +11,8 @@ namada:
 
   WORKDIR /__w/namada/namada
 
-  ARG toolchain=1.85.1
-  ARG nightly_toolchain=nightly-2025-03-27
+  ARG toolchain=1.81.0
+  ARG nightly_toolchain=nightly-2024-09-08
   ARG rocksdb_version=8.10.0
   ARG gaia_version=19.1.0
   ARG cw721_version=0.18.0
@@ -159,7 +159,7 @@ namada:
 wasm:
   FROM ubuntu:24.04
 
-  ARG toolchain=1.85.1
+  ARG toolchain=1.81.0
   ARG wasm_opt_version=118
   ARG tag=wasm-main
 
@@ -178,7 +178,7 @@ wasm:
   ENV CARGO_HOME="/root/.cargo"
 
   RUN rustup toolchain install $toolchain --no-self-update --component cargo,rust-std,rustc,rls,rust-analysis,rust-docs
-  RUN rustup target add wasm32-unknown-unknown
+  RUN rustup target add --toolchain $toolchain-x86_64-unknown-linux-gnu wasm32-unknown-unknown
   RUN rustup default $toolchain-x86_64-unknown-linux-gnu
 
   # install cargo binstall 
