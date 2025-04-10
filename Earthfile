@@ -177,7 +177,7 @@ wasm:
   ENV CARGO_HOME="/root/.cargo"
 
   RUN rustup toolchain install $toolchain --no-self-update --component cargo,rust-std,rustc,rls,rust-analysis,rust-docs
-  RUN rustup target add wasm32-unknown-unknown
+  RUN rustup target add --toolchain $toolchain-x86_64-unknown-linux-gnu wasm32-unknown-unknown
   RUN rustup default $toolchain-x86_64-unknown-linux-gnu
 
   # install cargo binstall 
