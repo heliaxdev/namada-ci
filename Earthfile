@@ -42,7 +42,6 @@ namada:
   RUN apt-get install -y git
   RUN apt-get install -y build-essential
   RUN apt-get install -y ca-certificates
-  RUN apt-get install -y git
   RUN apt-get install -y python3-pip
   RUN apt-get install -y pipx
   RUN apt-get install -y gcc-arm-linux-gnueabihf
@@ -169,6 +168,7 @@ wasm:
   RUN apt-get install -y protobuf-compiler 
   RUN apt-get install -y parallel
   RUN apt-get install -y curl
+  RUN apt-get install -y build-essential 
 
   RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
