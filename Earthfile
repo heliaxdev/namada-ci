@@ -197,6 +197,6 @@ wasm:
   RUN wget https://apt.llvm.org/llvm.sh
   RUN chmod u+x llvm.sh
   RUN ./llvm.sh 20
-  ENV CC = "/usr/bin/clang-18"
+  ENV CC = "/usr/bin/clang-20"
 
   SAVE IMAGE --push ghcr.io/heliaxdev/namada-ci:wasm-latest ghcr.io/heliaxdev/namada-ci:$tag
