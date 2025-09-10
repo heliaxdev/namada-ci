@@ -18,7 +18,7 @@ namada:
   ARG cw721_version=0.18.0
   ARG ics721_version=0.1.13
   ARG cometbft_version=0.37.11
-  ARG wasm_opt_version=119
+  ARG wasm_opt_version=124
   ARG mold_version=2.40.4
   ARG tag=namada-main
   ARG cmake_version=3.20.0
@@ -159,7 +159,7 @@ wasm:
   FROM ubuntu:24.04
 
   ARG toolchain=1.85.1
-  ARG wasm_opt_version=118
+  ARG wasm_opt_version=124
   ARG tag=wasm-main
 
   WORKDIR /__w/namada/namada
@@ -168,7 +168,11 @@ wasm:
   RUN apt-get install -y protobuf-compiler 
   RUN apt-get install -y parallel
   RUN apt-get install -y curl
-  RUN apt-get install -y build-essential 
+  RUN apt-get install -y build-essential
+  RUN apt-get install -y git
+  RUN apt-get install -y wget
+  RUN apt-get install -y lsb-release software-properties-common gnupg
+  RUN apt-get clean all
 
   RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
@@ -193,7 +197,9 @@ wasm:
   RUN chmod +x /usr/local/bin/wasm-opt
 
   # download llvm clang
-  RUN wget -qO- https://apt.llvm.org/llvm.sh | bash -s -- 18
-  ENV CC = "/usr/bin/clang-18"
+  RUN wget https://apt.llvm.org/llvm.sh
+  RUN chmod u+x llvm.sh
+  RUN ./llvm.sh 20
+  ENV CC="/usr/bin/clang-20"
 
   SAVE IMAGE --push ghcr.io/heliaxdev/namada-ci:wasm-latest ghcr.io/heliaxdev/namada-ci:$tag
