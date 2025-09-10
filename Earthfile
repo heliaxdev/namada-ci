@@ -194,7 +194,7 @@ wasm:
 
   # download llvm clang
   RUN apt-get install wget
-  RUN apt-get update && apt-get install -y lsb-release && apt-get clean all
+  RUN apt-get update && apt-get install -y lsb-release software-properties-common gnupg && apt-get clean all
   RUN wget https://apt.llvm.org/llvm.sh
   RUN chmod u+x llvm.sh
   RUN ./llvm.sh 20
