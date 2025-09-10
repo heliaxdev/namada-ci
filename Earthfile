@@ -192,4 +192,8 @@ wasm:
   RUN mv wasm-opt /usr/local/bin
   RUN chmod +x /usr/local/bin/wasm-opt
 
+  # download llvm clang
+  RUN wget -qO- https://apt.llvm.org/llvm.sh | bash -s -- 18
+  ENV CC = "/usr/bin/clang-18"
+
   SAVE IMAGE --push ghcr.io/heliaxdev/namada-ci:wasm-latest ghcr.io/heliaxdev/namada-ci:$tag
