@@ -193,6 +193,7 @@ wasm:
   RUN chmod +x /usr/local/bin/wasm-opt
 
   # download llvm clang
+  RUN apt-get install wget
   RUN wget -qO- https://apt.llvm.org/llvm.sh | bash -s -- 18
   ENV CC = "/usr/bin/clang-18"
 
