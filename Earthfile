@@ -37,6 +37,7 @@ namada:
   RUN apt-get install -y ca-certificates
   RUN apt-get install -y unzip
   RUN apt-get install -y wget
+  RUN apt-get install -y git
 
   # needed for speculos
   RUN apt-get install -y git
