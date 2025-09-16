@@ -37,7 +37,6 @@ namada:
   RUN apt-get install -y ca-certificates
   RUN apt-get install -y unzip
   RUN apt-get install -y wget
-  RUN apt-get install -y git
 
   # needed for speculos
   RUN apt-get install -y git
@@ -169,7 +168,8 @@ wasm:
   RUN apt-get install -y protobuf-compiler 
   RUN apt-get install -y parallel
   RUN apt-get install -y curl
-  RUN apt-get install -y build-essential 
+  RUN apt-get install -y build-essential
+  RUN apt-get install -y git
 
   RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
