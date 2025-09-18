@@ -19,7 +19,7 @@ namada:
   ARG ics721_version=0.1.13
   ARG cometbft_version=0.37.11
   ARG wasm_opt_version=119
-  ARG mold_version=2.37.1
+  ARG mold_version=2.40.4
   ARG tag=namada-main
   ARG cmake_version=3.20.0
 
