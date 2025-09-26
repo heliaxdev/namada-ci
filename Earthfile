@@ -17,7 +17,7 @@ namada:
   ARG gaia_version=19.1.0
   ARG cw721_version=0.18.0
   ARG ics721_version=0.1.13
-  ARG cometbft_version=0.37.11
+  ARG cometbft_version=0.38.17
   ARG wasm_opt_version=124
   ARG mold_version=2.40.4
   ARG tag=namada-main
