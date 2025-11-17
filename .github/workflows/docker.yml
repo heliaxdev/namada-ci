@@ -51,7 +51,9 @@ jobs:
         if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
           echo "IMAGE_TAG=-main" >> $GITHUB_ENV
         else
-          echo "IMAGE_TAG=-${{ github.ref_name }}" >> $GITHUB_ENV
+          pr_num="${{ github_ref_name }}"
+          pr_num=${pr_num%/*}
+          echo "IMAGE_TAG=-pr-$pr_num" >> $GITHUB_ENV
         fi
     - name: Run build
       run: earthly +${{ matrix.command.recipe }} --tag=${{ matrix.command.tag_suffix }}${{ env.IMAGE_TAG }}
