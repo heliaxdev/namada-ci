@@ -51,7 +51,7 @@ jobs:
         if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
           echo "IMAGE_TAG=-main" >> $GITHUB_ENV
         else
-          pr_num="${{ github_ref_name }}"
+          pr_num="${{ github.ref_name }}"
           pr_num=${pr_num%/*}
           echo "IMAGE_TAG=-pr-$pr_num" >> $GITHUB_ENV
         fi
