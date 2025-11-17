@@ -79,9 +79,9 @@ namada:
   ENV RUSTUP_HOME="/root/.rustup"
   ENV CARGO_HOME="/root/.cargo"
     
-  RUN rustup toolchain install $toolchain-x86_64-unknown-linux-gnu --no-self-update --component clippy,rustfmt,rust-src,llvm-tools-preview
+  RUN rustup toolchain install --profile minimal --no-self-update --component cargo,rust-std,rustc,clippy $toolchain-x86_64-unknown-linux-gnu
   RUN rustup target add --toolchain $toolchain-x86_64-unknown-linux-gnu wasm32-unknown-unknown
-  RUN rustup toolchain install $nightly_toolchain-x86_64-unknown-linux-gnu --no-self-update --component clippy,rustfmt,rust-src,llvm-tools-preview,rustc-codegen-cranelift-preview
+  RUN rustup toolchain install --profile minimal --no-self-update --component rust-std,rustc,rustfmt,clippy $nightly_toolchain-x86_64-unknown-linux-gnu
   RUN rustup target add --toolchain $nightly_toolchain-x86_64-unknown-linux-gnu wasm32-unknown-unknown
   RUN rustup default $toolchain-x86_64-unknown-linux-gnu
 
@@ -180,7 +180,7 @@ wasm:
   ENV RUSTUP_HOME="/root/.rustup"
   ENV CARGO_HOME="/root/.cargo"
 
-  RUN rustup toolchain install $toolchain --no-self-update --component cargo,rust-std,rustc
+  RUN rustup toolchain install $toolchain --profile minimal --no-self-update --component cargo,rust-std,rustc
   RUN rustup target add --toolchain $toolchain-x86_64-unknown-linux-gnu wasm32-unknown-unknown
   RUN rustup default $toolchain-x86_64-unknown-linux-gnu
 
