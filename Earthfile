@@ -11,13 +11,13 @@ namada:
 
   WORKDIR /__w/namada/namada
 
-  ARG toolchain=1.85.1
-  ARG nightly_toolchain=nightly-2025-03-27
+  ARG toolchain=1.91.1
+  ARG nightly_toolchain=nightly-2025-11-17
   ARG rocksdb_version=8.10.0
   ARG gaia_version=19.1.0
   ARG cw721_version=0.18.0
   ARG ics721_version=0.1.13
-  ARG cometbft_version=0.37.11
+  ARG cometbft_version=0.37.15
   ARG wasm_opt_version=124
   ARG mold_version=2.40.4
   ARG tag=namada-main
@@ -79,9 +79,9 @@ namada:
   ENV RUSTUP_HOME="/root/.rustup"
   ENV CARGO_HOME="/root/.cargo"
     
-  RUN rustup toolchain install $toolchain-x86_64-unknown-linux-gnu --no-self-update --component clippy,rls,rustfmt,rust-analysis,rust-docs,rust-src,llvm-tools-preview
+  RUN rustup toolchain install --profile minimal --no-self-update --component cargo,rust-std,rustc,clippy,rust-src $toolchain-x86_64-unknown-linux-gnu
   RUN rustup target add --toolchain $toolchain-x86_64-unknown-linux-gnu wasm32-unknown-unknown
-  RUN rustup toolchain install $nightly_toolchain-x86_64-unknown-linux-gnu --no-self-update --component clippy,rustfmt,rust-analysis,rust-docs,rust-src,llvm-tools-preview,rustc-codegen-cranelift-preview
+  RUN rustup toolchain install --profile minimal --no-self-update --component rust-std,rustc,rustfmt,clippy $nightly_toolchain-x86_64-unknown-linux-gnu
   RUN rustup target add --toolchain $nightly_toolchain-x86_64-unknown-linux-gnu wasm32-unknown-unknown
   RUN rustup default $toolchain-x86_64-unknown-linux-gnu
 
@@ -180,7 +180,7 @@ wasm:
   ENV RUSTUP_HOME="/root/.rustup"
   ENV CARGO_HOME="/root/.cargo"
 
-  RUN rustup toolchain install $toolchain --no-self-update --component cargo,rust-std,rustc,rls,rust-analysis,rust-docs
+  RUN rustup toolchain install $toolchain --profile minimal --no-self-update --component cargo,rust-std,rustc
   RUN rustup target add --toolchain $toolchain-x86_64-unknown-linux-gnu wasm32-unknown-unknown
   RUN rustup default $toolchain-x86_64-unknown-linux-gnu
 
