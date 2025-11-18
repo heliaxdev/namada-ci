@@ -79,7 +79,7 @@ namada:
   ENV RUSTUP_HOME="/root/.rustup"
   ENV CARGO_HOME="/root/.cargo"
     
-  RUN rustup toolchain install --profile minimal --no-self-update --component cargo,rust-std,rustc,clippy $toolchain-x86_64-unknown-linux-gnu
+  RUN rustup toolchain install --profile minimal --no-self-update --component cargo,rust-std,rustc,clippy,llvm-tools-preview $toolchain-x86_64-unknown-linux-gnu
   RUN rustup target add --toolchain $toolchain-x86_64-unknown-linux-gnu wasm32-unknown-unknown
   RUN rustup toolchain install --profile minimal --no-self-update --component rust-std,rustc,rustfmt,clippy $nightly_toolchain-x86_64-unknown-linux-gnu
   RUN rustup target add --toolchain $nightly_toolchain-x86_64-unknown-linux-gnu wasm32-unknown-unknown
